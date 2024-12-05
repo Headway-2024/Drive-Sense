@@ -32,6 +32,20 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<UserDTO> login(@RequestParam String email, @RequestParam String password) {
+        logger.info("Logging in user with email: {}", email);
+        UserDTO userDTO = authService.login(email, password);
+        return ResponseEntity.ok(userDTO);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@RequestParam String id) {
+        logger.info("Logging out user with id: {}", id);
+        authService.logout(id);
+        return ResponseEntity.ok("Successfully logged out");
+    }
+
     @GetMapping
     public ResponseEntity<String> hello(){
         return ResponseEntity.status(HttpStatus.CREATED).body("Hello World");
