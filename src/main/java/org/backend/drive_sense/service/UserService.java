@@ -9,6 +9,7 @@ import org.backend.drive_sense.dto.UserDTO;
 import org.backend.drive_sense.entity.User;
 import org.backend.drive_sense.mapper.UserMapper;
 import org.backend.drive_sense.repository.UserRepository;
+import org.mapstruct.control.MappingControl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import jakarta.validation.Validator;
@@ -110,6 +111,46 @@ public class UserService {
                     if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
                         validateRawPassword(userDTO.getPassword());
                         existingUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+                    }
+                    if(userDTO.getCountry()!=null){
+                        Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO , "country");
+                        if (!violations.isEmpty()) {
+                            logger.error("Validation errors: {}", getValidationErrors(violations));
+                            throw new IllegalArgumentException("Validation errors: " + getValidationErrors(violations));
+                        }
+                        existingUser.setCountry(userDTO.getCountry());
+                    }
+                    if(userDTO.getGender()!=null){
+                        Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO , "gender");
+                        if (!violations.isEmpty()) {
+                            logger.error("Validation errors: {}", getValidationErrors(violations));
+                            throw new IllegalArgumentException("Validation errors: " + getValidationErrors(violations));
+                        }
+                        existingUser.setGender(userDTO.getGender());
+                    }
+                    if(userDTO.getAddress()!=null){
+                        Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO , "address");
+                        if (!violations.isEmpty()) {
+                            logger.error("Validation errors: {}", getValidationErrors(violations));
+                            throw new IllegalArgumentException("Validation errors: " + getValidationErrors(violations));
+                        }
+                        existingUser.setAddress(userDTO.getAddress());
+                    }
+                    if(userDTO.getRole()!=null){
+                        Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO , "role");
+                        if (!violations.isEmpty()) {
+                            logger.error("Validation errors: {}", getValidationErrors(violations));
+                            throw new IllegalArgumentException("Validation errors: " + getValidationErrors(violations));
+                        }
+                        existingUser.setRole(userDTO.getRole());
+                    }
+                    if(userDTO.getPhone()!=null){
+                        Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO , "phone");
+                        if (!violations.isEmpty()) {
+                            logger.error("Validation errors: {}", getValidationErrors(violations));
+                            throw new IllegalArgumentException("Validation errors: " + getValidationErrors(violations));
+                        }
+                        existingUser.setPhone(userDTO.getPhone());
                     }
                     return userRepository.save(existingUser);
                 })

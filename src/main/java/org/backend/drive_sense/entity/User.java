@@ -39,11 +39,27 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "phone", unique = true)
+    private String phone;
+
     @Column(name = "access_token")
     private String accessToken;
 
     @Column(name = "refresh_token")
     private String refreshToken;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name ="country")
+    private String country;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private UserRole role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
