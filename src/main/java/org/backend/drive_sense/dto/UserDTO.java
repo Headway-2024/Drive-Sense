@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.backend.drive_sense.entity.UserRole;
 
 import java.util.UUID;
 
@@ -39,4 +40,6 @@ public class UserDTO {
     private String country;
 
     private String phone;
+
+    private UserRole role;
 }

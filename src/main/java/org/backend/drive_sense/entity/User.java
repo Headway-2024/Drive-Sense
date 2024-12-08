@@ -57,6 +57,10 @@ public class User implements UserDetails {
     @Column(name ="country")
     private String country;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private UserRole role;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptyList(); // no roles are assigned to users

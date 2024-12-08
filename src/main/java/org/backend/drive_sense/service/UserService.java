@@ -136,6 +136,22 @@ public class UserService {
                         }
                         existingUser.setAddress(userDTO.getAddress());
                     }
+                    if(userDTO.getRole()!=null){
+                        Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO , "role");
+                        if (!violations.isEmpty()) {
+                            logger.error("Validation errors: {}", getValidationErrors(violations));
+                            throw new IllegalArgumentException("Validation errors: " + getValidationErrors(violations));
+                        }
+                        existingUser.setRole(userDTO.getRole());
+                    }
+                    if(userDTO.getPhone()!=null){
+                        Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO , "phone");
+                        if (!violations.isEmpty()) {
+                            logger.error("Validation errors: {}", getValidationErrors(violations));
+                            throw new IllegalArgumentException("Validation errors: " + getValidationErrors(violations));
+                        }
+                        existingUser.setPhone(userDTO.getPhone());
+                    }
                     return userRepository.save(existingUser);
                 })
                 .map(userMapper::userToUserDTO)
