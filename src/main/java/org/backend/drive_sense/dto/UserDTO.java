@@ -1,5 +1,6 @@
 package org.backend.drive_sense.dto;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -30,4 +31,12 @@ public class UserDTO {
     private String accessToken;
 
     private String refreshToken;
+
+    private String address;
+
+    private String gender;
+
+    private String country;
+
+    private String phone;
 }
