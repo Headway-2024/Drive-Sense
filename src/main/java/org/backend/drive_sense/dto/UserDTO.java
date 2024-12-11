@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.backend.drive_sense.entity.UserRole;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -42,4 +43,7 @@ public class UserDTO {
     private String phone;
 
     private UserRole role;
+
+    private Set<UUID> vehiclesIds;
+
 }

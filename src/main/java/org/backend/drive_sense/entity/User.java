@@ -12,6 +12,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -61,9 +63,15 @@ public class User implements UserDetails {
     @Column(name = "role")
     private UserRole role;
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private Set<Vehicle> vehicles = new HashSet<>();
+
+    @OneToOne(mappedBy = "manager")
+    private Fleet managedFleet;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList(); // no roles are assigned to users
+        return Collections.emptyList();
     }
 
     @Override
